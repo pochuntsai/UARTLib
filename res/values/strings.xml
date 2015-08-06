@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">HelloUart</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="EXIT">EXIT</string>
+	<string name="CLOSE">CLOSE</string>
+	<string name="CLEAR">CLEAR</string>
+	<string name="OPEN">OPEN</string>
+	<string name="SEND">SEND</string>
+
+</resources>
