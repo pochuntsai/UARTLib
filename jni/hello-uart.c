@@ -37,7 +37,7 @@ JNIEXPORT jint JNICALL Java_idv_android_hellouart_Uart2C_openUart(JNIEnv *env,jo
 	strcat(sall, str2);
 
 	fd = open(sall, O_RDWR | O_NOCTTY | O_NDELAY);
-	//LOGI("JNI open uart port device node = %s , fdnum=%d \n",sall,fd);
+	LOGI("JNI open uart port device node = %s , fdnum=%d \n",sall,fd);
 	(*env)->ReleaseStringUTFChars(env , portName, str2);
 	free(sall);
 
@@ -52,10 +52,10 @@ JNIEXPORT void JNICALL Java_idv_android_hellouart_Uart2C_closeUart(JNIEnv *env,j
 
 JNIEXPORT jint JNICALL Java_idv_android_hellouart_Uart2C_setUart(JNIEnv *env,jobject mc, jint i)
 {
-	int Baud_rate[] = { B9600, B115200 , B19200};
+	int Baud_rate[] = { B9600, B115200 , B19200, B230400};
 
 
-	LOGI("UART Set baudrate is %d",Baud_rate[i]);
+	LOGI("JNI UART Set baudrate is %d",Baud_rate[i]);
 	tcgetattr(fd, &oldtio);
 	tcgetattr(fd, &newtio);
 	cfsetispeed(&newtio, Baud_rate[i]);
@@ -79,19 +79,6 @@ JNIEXPORT jint JNICALL Java_idv_android_hellouart_Uart2C_setUart(JNIEnv *env,job
 	}
 	return fd;
 }
-/*
-JNIEXPORT jint JNICALL Java_idv_android_hellouart_Uart2C_sendMsgUart(JNIEnv *env,jobject mc, jstring str)
-{
-	int len;
-	const char *buf;
-	buf = (*env)->GetStringUTFChars(env, str, NULL);
-	len = (*env)->GetStringLength(env, str);
-	LOGI("*** sendMsgUart buf = %s",buf);
-	write(fd, buf, len);
-	(*env)->ReleaseStringUTFChars(env, str, buf);
-	return 0;
-}
-*/
 
 JNIEXPORT jint JNICALL Java_idv_android_hellouart_Uart2C_sendMsgUart(JNIEnv *env,jobject mc, jint fd_num, jbyteArray inByte)
 {
